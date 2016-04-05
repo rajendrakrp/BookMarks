@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/nik2311/BookMarks/issues"
   },
-  "homepage": "https://github.com/nik2311/BookMarks#readme"
+  "homepage": "https://github.com/nik2311/BookMarks#readme",
+  "dependencies": {
+    "mongoose": "^4.4.11"
+  }
 }
