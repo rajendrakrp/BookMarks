@@ -1,0 +1,20 @@
+{
+  "name": "BookMarks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nik2311/BookMarks.git"
+  },
+  "keywords": [],
+  "author": "Nikhil Navin <nikhil.navin@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nik2311/BookMarks/issues"
+  },
+  "homepage": "https://github.com/nik2311/BookMarks#readme"
+}
