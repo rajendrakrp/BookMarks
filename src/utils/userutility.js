@@ -32,6 +32,27 @@ var createUser = function (userdata) {
 
 }
 
+//get user returns a single user hence it accepts email as param  as it is unique on model
+var getUser = function (email) {
+    return new Promise(function (resolve, reject) {
+        UserModel.findOne({ email: email},{ password: 0})
+            .then(function (userobj) {
+                //savedPerson will be an array.
+                //The first element is the saved instance of person
+                //The second element is the number 1
+                console.log('Got user...');
+                console.log(JSON.stringify(userobj));
+                resolve(userobj);
+            }, function (err) {
+                console.log(err);
+                reject(err);
+            })
+            .catch(function (err) {
+                console.log("There was an error" + err.errmsg);
+                reject(err);
+            })
+    });
+}
 
 
 var createUserComment = function (user,comment) {
@@ -62,4 +83,4 @@ var createUserComment = function (user,comment) {
 }
 
 
-module.exports = {createuser :createUser ,createusercomment : createUserComment};
+module.exports = {createuser :createUser ,createusercomment : createUserComment, getuser: getUser};

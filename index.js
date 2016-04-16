@@ -28,7 +28,19 @@ var initialize = function() {
 
 
 initialize();
-process.exit(0);
+// getuser  = require('./src/utils/userutility').getuser;
+//
+//
+// getuser('nikhil.navin999mmm@gmail.com').then(function (user) {
+//
+//     console.log(' Found usser')
+//     console.log(user);
+//     process.exit(0);
+//
+// },function (err) {
+//     console.log(err);
+//     process.exit(0)
+// });
 
 
 
