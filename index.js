@@ -17,7 +17,7 @@ process.on('exit',function (code) {
 
 
 
-var models = ['./src/user/user.js','./src/user/usercomment.js','./src/weburl/weburl.js','./src/bookmarks/bookmarks.js' ];
+var models = ['./src/user/models.js','./src/weburl/models.js','./src/bookmarks/models.js' ];
 
 var initialize = function() {
     var l = models.length;
@@ -31,7 +31,7 @@ initialize();
 getuser  = require('./src/utils/userutility').getuser;
 
 
-getuser('nikhil.navin999mmm@gmail.com').then(function (user) {
+getuser('nikhil.navin999@gmail.com').then(function (user) {
 
     console.log(' Found usser')
     console.log(user);
