@@ -17,7 +17,7 @@ process.on('exit',function (code) {
 
 
 
-var models = ['./src/models/user','./src/models/usercomment.js','./src/models/weburl.js','./src/models/bookmarks.js' ];
+var models = ['./src/user/user.js','./src/user/usercomment.js','./src/weburl/weburl.js','./src/bookmarks/bookmarks.js' ];
 
 var initialize = function() {
     var l = models.length;
@@ -28,19 +28,19 @@ var initialize = function() {
 
 
 initialize();
-// getuser  = require('./src/utils/userutility').getuser;
-//
-//
-// getuser('nikhil.navin999mmm@gmail.com').then(function (user) {
-//
-//     console.log(' Found usser')
-//     console.log(user);
-//     process.exit(0);
-//
-// },function (err) {
-//     console.log(err);
-//     process.exit(0)
-// });
+getuser  = require('./src/utils/userutility').getuser;
+
+
+getuser('nikhil.navin999mmm@gmail.com').then(function (user) {
+
+    console.log(' Found usser')
+    console.log(user);
+    process.exit(0);
+
+},function (err) {
+    console.log(err);
+    process.exit(0)
+});
 
 
 

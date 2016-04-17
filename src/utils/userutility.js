@@ -2,8 +2,8 @@
  * Created by nikhil on 4/16/16.
  */
 
-const UserModel = require('../models/user').User;
-const UserComment = require('../models/usercomment').Comment;
+const UserModel = require('../user/user').User;
+const UserComment = require('../user/usercomment').Comment;
 
 var createUser = function (userdata) {
 
