@@ -23,7 +23,35 @@ module.exports.init = function() {
     });
 
 
+    var UserProfileSchema = new Schema({
+        'user': {type: Schema.ObjectId, ref: 'User' ,required: true },
+        'first name':{type:String},
+        'last name':{type:String},
+        'Area':{ 'name':{type:String},
+                 'lat':{type:Number},
+                 'long':{type:Number}
+               },
+        'city':{type:String}
+    });
+
+
     Comment  = mongoose.model("Comments", Commentschema);
     module.exports.Schema = Commentschema;
     module.exports.Comment = Comment;
+
+
+    var UserProfileSchema = new Schema({
+        'user': {type: Schema.ObjectId, ref: 'User' ,required: true },
+        'first name':{type:String},
+        'last name':{type:String},
+        'Area':{ 'name':{type:String},
+                 'lat':{type:Number},
+                 'long':{type:Number}
+               },
+        'city':{type:String}
+    });
+
+    Profile  = mongoose.model("Profile", UserProfileSchema);
+    module.exports.Profile = Profile;
+
 };

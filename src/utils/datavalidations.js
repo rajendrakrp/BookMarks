@@ -5,7 +5,6 @@ const crypto = require('crypto');
 
 
 const secret = 'm0n9b8v7';
-const encrypter = crypto.createHmac('sha256', secret);
 
 
 function validateEmail() {
@@ -16,7 +15,7 @@ function validateEmail() {
 
 function passsword(passwordstring) {
 
-    var hash = encrypter.update(passwordstring).digest('hex');
+    var hash = crypto.createHmac('sha256', secret).update(passwordstring).digest('hex');
 
     return hash;
 }

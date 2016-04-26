@@ -4,6 +4,8 @@
 
 const UserModel = require('../user/models').User;
 const UserComment = require('../user/models').Comment;
+const UserProfile = require('../user/models').Profile;
+const dataValidator = require('./datavalidations');
 
 var createUser = function (userdata) {
 
@@ -52,6 +54,49 @@ var getUser = function (email) {
                 reject(err);
             })
     });
+};
+
+
+var getUserProfile = function (user) {
+    return new Promise(function (resolve,reject) {
+        UserProfile.findOne({'user._id':user._id},{'user.password':0}).then(function (profileobj) {
+            return profileobj;
+        },function (err) {
+            return err;
+        })
+    })
+};
+
+
+var validateUser = function (username,password) {
+    return new Promise(function (resolve, reject) {
+        UserModel.findOne({ email: username})
+            .then(function (userobj) {
+                //savedPerson will be an array.
+                //The first element is the saved instance of person
+                //The second element is the number 1
+                if(userobj) {
+                    console.log('is user ' + userobj.password);
+                    if (dataValidator.password(password) == userobj.password) {
+
+                        resolve(true);
+                    }
+                    else {
+                        reject('Invalid password');
+                    }
+                }
+                else{
+                    reject(false);
+                }
+            }, function (err) {
+                console.log(err);
+                reject('invalid username or password');
+            })
+            .catch(function (err) {
+                console.log("There was an error in user......" + err);
+                reject(err);
+            })
+    });
 }
 
 
@@ -83,4 +128,4 @@ var createUserComment = function (user,comment) {
 }
 
 
-module.exports = {createuser :createUser ,createusercomment : createUserComment, getuser: getUser};
+module.exports = {createuser :createUser ,createusercomment : createUserComment, getuser: getUser , isuser : validateUser ,getprofile: getUserProfile};

@@ -28,19 +28,24 @@ var initialize = function() {
 
 
 initialize();
-getuser  = require('./src/utils/userutility').getuser;
 
 
-getuser('nikhil.navin999@gmail.com').then(function (user) {
+var app = require('./src//MainApp');
 
-    console.log(' Found usser')
-    console.log(user);
-    process.exit(0);
-
-},function (err) {
-    console.log(err);
-    process.exit(0)
-});
+app.start();
+// getuser  = require('./src/utils/userutility').getuser;
+//
+//
+// getuser('nikhil.navin999@gmail.com').then(function (user) {
+//
+//     console.log(' Found usser')
+//     console.log(user);
+//     process.exit(0);
+//
+// },function (err) {
+//     console.log(err);
+//     process.exit(0)
+// });
 
 
 
