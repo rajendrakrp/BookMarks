@@ -4,7 +4,7 @@ Promise.promisifyAll(mongoose);
 
 
 
-mongoose.connect('mongodb://localhost/bookmark_db_dev');
+mongoose.connect('mongodb://localhost:27017/bookmark_db_dev');
 
 
 

@@ -57,6 +57,31 @@ var getUser = function (email) {
 };
 
 
+
+var createProfile = function (userprofiledata) {
+
+    return new Promise(function (resolve, reject) {
+        console.log('Saving user profile');
+        console.log(usr);
+        var usrprofile = new UserProfile(userprofiledata);
+
+        usrprofile.save()
+            .then(function (savedProfile) {
+                console.log('saved user profile...');
+                console.log(JSON.stringify(savedProfile));
+                resolve(savedProfile);
+            }, function (err) {
+                console.log(err);
+                reject(err);
+            })
+            .catch(function (err) {
+                console.log("There was an error" + err.errmsg);
+                reject(err);
+            })
+    });
+
+}
+
 var getUserProfile = function (user) {
     return new Promise(function (resolve,reject) {
         UserProfile.findOne({'user._id':user._id},{'user.password':0}).then(function (profileobj) {
@@ -128,4 +153,9 @@ var createUserComment = function (user,comment) {
 }
 
 
-module.exports = {createuser :createUser ,createusercomment : createUserComment, getuser: getUser , isuser : validateUser ,getprofile: getUserProfile};
+module.exports = {createuser :createUser ,
+                  createusercomment : createUserComment,
+                  getuser: getUser ,
+                  isuser : validateUser ,
+                  getprofile: getUserProfile,
+                  createprofile:createProfile};

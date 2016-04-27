@@ -50,6 +50,37 @@ router.get('/:username/profile', function (req, res) {
 
 router.post('/:username/profile/',function (req,res) {
 
+    var email = req.body.email;
+    var pass = req.body.password;
+
+    res.promise(new Promise(function(resolve,reject){
+
+       userutils.getuser(email).then(function(user){
+       if(user){
+           profiledata =    {
+                        'user': user._id,
+                        'first name':req.body.firstname,
+                        'last name':req.body.lastname,
+                        'Area':{ 'name':req.body.area.name,
+                            'lat':req.body.area.lat,
+                            'long':req.body.area.long
+                                },
+                        'city':req.body.city
+                        }
+           userutils.createprofile(profiledata).then(function(profileobj){
+               resolve(profileobj);
+           },function(err){
+               reject(err);
+           });
+       }
+        reject(null);
+    }, function (err) {reject(err.message);});
+
+    }));
+
+
+
+
 });
 
 
@@ -92,5 +123,8 @@ router.post('/signup/',function (req,res) {
         return {'error':err.message};
     }))
 });
+
+
+
 
 module.exports = router;
