@@ -12,6 +12,7 @@ var Schema = mongoose.Schema;
 
 module.exports.init = function() {
     var BookMarkSchema = new Schema({
+        'markedby':{type :Schema.ObjectId,ref : 'Profile'},
         'url': {type: String, ref: 'WebUrl' ,required: true },
         'notes': {type: String},
         'date': {type:Date},

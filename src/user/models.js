@@ -37,7 +37,8 @@ module.exports.init = function() {
                  'lat':{type:Number},
                  'long':{type:Number}
                },
-        'city':{type:String}
+        'city':{type:String},
+        'work':{type:String}
     });
 
     Profile  = mongoose.model("Profile", UserProfileSchema);

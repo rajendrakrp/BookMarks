@@ -14,7 +14,7 @@ module.exports.init = function() {
     var WebUrlSchema = new Schema({
         'url': {type: String,required: true },
         'authorname': {type: String},
-        'author':{type :Schema.ObjectId,ref : 'User'},
+        'author':{type :Schema.ObjectId,ref : 'Profile'},
         'tags':[{type : String}]
     });
 

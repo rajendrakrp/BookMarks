@@ -6,6 +6,8 @@ const UserModel = require('../user/models').User;
 const UserComment = require('../user/models').Comment;
 const UserProfile = require('../user/models').Profile;
 const dataValidator = require('./datavalidations');
+const weburlModel = require('../weburl/models').WebUrl;
+const bookmarkModel = require('../bookmarks/models').Bookmark;
 
 var createUser = function (userdata) {
 
@@ -35,9 +37,9 @@ var createUser = function (userdata) {
 }
 
 //get user returns a single user hence it accepts email as param  as it is unique on model
-var getUser = function (email) {
+var getUser = function (email,avoidfields) {
     return new Promise(function (resolve, reject) {
-        UserModel.findOne({ email: email},{ password: 0})
+        UserModel.findOne({ email: email},avoidfields)
             .then(function (userobj) {
                 //savedPerson will be an array.
                 //The first element is the saved instance of person
@@ -62,7 +64,6 @@ var createProfile = function (userprofiledata) {
 
     return new Promise(function (resolve, reject) {
         console.log('Saving user profile');
-        console.log(usr);
         var usrprofile = new UserProfile(userprofiledata);
 
         usrprofile.save()
@@ -82,16 +83,82 @@ var createProfile = function (userprofiledata) {
 
 }
 
-var getUserProfile = function (user) {
+var getUserProfile = function (user,avoidfields) {
     return new Promise(function (resolve,reject) {
-        UserProfile.findOne({'user._id':user._id},{'user.password':0}).then(function (profileobj) {
-            return profileobj;
+        UserProfile.findOne({'user':user._id},avoidfields).then(function (profileobj) {
+            resolve(profileobj);
         },function (err) {
-            return err;
+            reject(err);
         })
     })
 };
 
+
+var createWebUrl = function(urldata){
+    return new Promise(function (resolve, reject) {
+        console.log('Saving web url');
+        var urlobj = new weburlModel(urldata);
+
+        urlobj.save()
+            .then(function (savedUrl) {
+
+                console.log('saved url...');
+                console.log(JSON.stringify(savedUrl));
+                resolve(savedUrl);
+            }, function (err) {
+                console.log(err);
+                reject(err);
+            })
+            .catch(function (err) {
+                console.log("There was an error" + err.errmsg);
+                reject(err);
+            })
+    });
+}
+
+var getWebUrl = function (user,avoidfields) {
+    return new Promise(function (resolve,reject) {
+        weburlModel.find({'author':user},avoidfields).then(function (weburls) {
+            resolve(weburls);
+        },function (err) {
+            reject(err);
+        })
+    })
+};
+
+
+var createBookmark = function (bookmarkdata) {
+
+    return new Promise(function (resolve, reject) {
+        console.log('Saving bookmark data');
+        var bookmark = new bookmarkModel(bookmarkdata);
+
+        bookmark.save()
+            .then(function (savedbookmark) {
+                console.log(JSON.stringify(savedbookmark));
+                resolve(savedbookmark);
+            }, function (err) {
+                console.log(err);
+                reject(err);
+            })
+            .catch(function (err) {
+                console.log("There was an error" + err.errmsg);
+                reject(err);
+            })
+    });
+
+}
+
+var getBookmark = function (user,avoidfields) {
+    return new Promise(function (resolve,reject) {
+        bookmarkModel.find({'markedby':user},avoidfields).then(function (weburls) {
+            console.log('found bookmarks '+weburls);
+            resolve(weburls);
+        },function (err) {
+            reject(err);
+        })
+    })
+};
 
 var validateUser = function (username,password) {
     return new Promise(function (resolve, reject) {
@@ -158,4 +225,8 @@ module.exports = {createuser :createUser ,
                   getuser: getUser ,
                   isuser : validateUser ,
                   getprofile: getUserProfile,
-                  createprofile:createProfile};
+                  createprofile:createProfile,
+                  createweburl:createWebUrl,
+                   getweburl:getWebUrl,
+                  createbookmark:createBookmark,
+                  getbookmark:getBookmark  };
